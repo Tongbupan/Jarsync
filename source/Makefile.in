@@ -1,0 +1,36 @@
+# Makefile for Jarsync.
+# $Id: Makefile.in,v 1.6 2003/02/09 10:11:47 rsdio Exp $
+
+COMPILER = @COMPILER@
+CFLAGS = @CFLAGS@
+
+sources = \
+  org/metastatic/rsync/BrokenMD4.java \
+  org/metastatic/rsync/Checksum32.java \
+  org/metastatic/rsync/ChecksumPair.java \
+  org/metastatic/rsync/Configuration.java \
+  org/metastatic/rsync/DataBlock.java \
+  org/metastatic/rsync/Delta.java \
+  org/metastatic/rsync/Generator.java \
+  org/metastatic/rsync/JarsyncProvider.java \
+  org/metastatic/rsync/MD4.java \
+  org/metastatic/rsync/Matcher.java \
+  org/metastatic/rsync/Offsets.java \
+  org/metastatic/rsync/Rdiff.java \
+  org/metastatic/rsync/Rebuilder.java \
+  org/metastatic/rsync/RollingChecksum.java \
+  org/metastatic/rsync/RsyncConstants.java \
+  org/metastatic/rsync/TwoKeyMap.java \
+  org/metastatic/rsync/Util.java
+
+classes = $(patsubst %.java,../classes/%.class,$(sources))
+
+all: compile
+
+compile: $(classes)
+
+$(classes): ../classes/%.class: %.java
+	$(COMPILER) $(CFLAGS) $<
+
+clean:
+	rm -f $(classes)
